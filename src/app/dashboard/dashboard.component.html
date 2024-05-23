@@ -1,0 +1,21 @@
+
+  
+  <div *ngIf="authService.user$ | async as user">
+    
+    <button (click)="authService.signOut()">Sign Out</button>
+    <h1>Welcome, {{ user.displayName }}</h1>
+    <p>Email: {{ user.email }}</p>
+
+    <h1>Todo List</h1>
+    <div class="todo-input">
+      <input [(ngModel)]="newTodoTitle" placeholder="Add new todo">
+      <button (click)="addTodo()">Add</button>
+    </div>
+    <ul>
+      <li *ngFor="let todo of todos">
+        <input type="checkbox" [checked]="todo.completed" (change)="toggleComplete(todo._id)">
+        <span [class.completed]="todo.completed">{{ todo.title }}</span>
+        <button (click)="deleteTodo(todo._id)">Delete</button>
+      </li>
+    </ul>
+  </div>
